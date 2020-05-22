@@ -25,7 +25,7 @@ SECRET_KEY = '!uwid4q5n#=+!^!h49&v_%vt@tb^+7ey%dnu7!bcpk*ikd5kl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pseudosodiumblogs.herokuapp.com']
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
     'width': 1120,
