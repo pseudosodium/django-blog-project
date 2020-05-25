@@ -5,6 +5,7 @@ from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import NewUserForm
+from django.contrib.auth.models import User
 
 def single_slug(request, single_slug):
     categories = [c.category_slug for c in blogCategory.objects.all()]
@@ -29,6 +30,8 @@ def single_slug(request, single_slug):
     return HttpResponse(f"'{single_slug}' does not correspond to anything we know of!")
 
 
+def account(request):
+    return render(request, 'main/account.html', {"user":request.user})
 
 def homepage(request):
     return render(request=request,

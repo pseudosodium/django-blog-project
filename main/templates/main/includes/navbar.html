@@ -1,6 +1,7 @@
 <nav>
   <div class="nav-wrapper">
     <a href="#" class="brand-logo">Blogs</a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="/">Home</a></li>
       {% if user.is_authenticated %}
@@ -13,3 +14,13 @@
     </ul>
   </div>
 </nav>
+
+<ul class="sidenav" id="mobile-demo">
+  {% if user.is_authenticated %}
+       <li><a href="/account">{{user.username|title}}</a></li>
+       <li><a href="/logout">Logout</a></li>
+  {% else %}
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+  {% endif %}
+</ul>

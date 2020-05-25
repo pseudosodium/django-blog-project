@@ -1,0 +1,13 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+  <div class="container">
+    <ul class="collection">
+      <li class="collection-item"><strong>Username: </strong>{{user.username}}</li>
+      <li class="collection-item"><strong>Email: </strong>{{user.email}}</li>
+      <li class="collection-item"><strong>Last Login Session: </strong>{{user.last_login}}</li>
+      <li class="collection-item"><strong>Date Joined: </strong>{{user.date_joined}}</li>
+    </ul>
+  </div>
+
+{% endblock %}
