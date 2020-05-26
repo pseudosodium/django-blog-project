@@ -1,0 +1,11 @@
+{% extends 'main/header.html' %}
+{% block content %}
+  <div class="container">
+    <form method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button style="background-color:#F4EB16; color:black" class="btn btn-outline-info" type="submit">Change Details</button>
+      <p style="font-size:70%">Click <a href="change-password">here</a> to change your password.</p>
+    </form>
+  </div>
+{% endblock %}

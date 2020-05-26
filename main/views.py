@@ -4,8 +4,10 @@ from .models import blog, blogCategory, blogSeries
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import NewUserForm
+from .forms import NewUserForm, EditProfileForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def single_slug(request, single_slug):
     categories = [c.category_slug for c in blogCategory.objects.all()]
@@ -30,8 +32,37 @@ def single_slug(request, single_slug):
     return HttpResponse(f"'{single_slug}' does not correspond to anything we know of!")
 
 
-def account(request):
+def view_profile(request):
     return render(request, 'main/account.html', {"user":request.user})
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            user = form.save()
+            messages.info(request, "Account Details Changed Successfully!")
+            return redirect("/account")
+    else:
+        form = EditProfileForm(instance=request.user)
+        return render(request, "main/edit.html", {"form":form})
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            user = form.save()
+            messages.info(request, f"Password changed succesfully for {user.username}")
+            update_session_auth_hash(request, form.user)
+            return redirect("/account")
+        else:
+            messages.error(request, "Error")
+            return redirect("/change-password")
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, "main/change-password.html", {"form":form})
 
 def homepage(request):
     return render(request=request,

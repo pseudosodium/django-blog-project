@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
 class NewUserForm(UserCreationForm):
@@ -19,3 +19,10 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class EditProfileForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = User
+        fields = ("email", "first_name", "last_name")
+        exclude = ("password",)

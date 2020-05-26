@@ -16,6 +16,7 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
+  <li><a href="/">Home</a></li>
   {% if user.is_authenticated %}
        <li><a href="/account">{{user.username|title}}</a></li>
        <li><a href="/logout">Logout</a></li>
