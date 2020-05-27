@@ -9,6 +9,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 
+def default(request):
+    if request.user.is_authenticated:
+        return redirect("/home")
+    else:
+        return render(request, "main/default.html", )
+
 def single_slug(request, single_slug):
     categories = [c.category_slug for c in blogCategory.objects.all()]
 
@@ -98,7 +104,7 @@ def register(request):
 def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("main:homepage")
+    return redirect("main:default")
 
 def login_request(request):
     if request.method == "POST":
