@@ -4,15 +4,38 @@
   <link rel="stylesheet" href="{% static 'tinymce/css/prism.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Fixing mobile icon -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Style for the footer to stay at the bottom -->
+  <style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  .main {
+    flex: 1 0 auto;
+  }
+  </style>
 </head>
 <body>
-  {% include "main/includes/navbar.html" %}
-  {% include "main/includes/messages.html" %}
-  <div class="container">
-    <br>
-    {% block content %}
-    {% endblock %}
+  <!-- Added between header and footer -->
+  <div class="main">
+    {% include "main/includes/navbar.html" %}
+    {% include "main/includes/messages.html" %}
+    <div class="container">
+      <br>
+      {% block content %}
+      {% endblock %}
+    </div>
   </div>
+
+  <!-- Footer -->
+  {% include "main/includes/footer.html" %}
+
 </body>
 <script src="{% static 'tinymce/js/prism.js' %}"></script>
 <script>M.AutoInit();</script>
